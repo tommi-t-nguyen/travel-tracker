@@ -24,8 +24,6 @@ describe('Trip', () => {
         "alt": "opera house and city buildings on the water with boats"
       }];
     trip = new Trip(tripsData, destinationData);
-    console.log(trip)
-
   });
 
   it('should be an function', () => {

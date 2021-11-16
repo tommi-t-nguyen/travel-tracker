@@ -1,4 +1,4 @@
-import Trip from "./Trip"
+import Trip from "./Trip.js"
 
 class Traveler {
   constructor(travelerData, tripsData, destinationData){

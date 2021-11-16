@@ -1,16 +1,19 @@
 export const getTravelerData = (userID) => {
   return fetch(`http://localhost:3001/api/v1/travelers/${userID}`)
     .then(response => response.json())
+    .catch(err => consle.log(err))
 }
 
 export const getAllTrips = () => {
   return fetch('http://localhost:3001/api/v1/trips')
   .then(response => response.json())
+  .catch(err => consle.log(err))
 }
 
 export const getAllDestinations = () => {
   return fetch('http://localhost:3001/api/v1/destinations')
   .then(response => response.json())
+  .catch(err => consle.log(err))
 }
 export const addTrip = (addTripData) => {
   fetch('http://localhost:3001/api/v1/trips',{

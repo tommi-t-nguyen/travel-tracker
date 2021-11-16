@@ -9,9 +9,9 @@ describe('Trip', () => {
         "id": 3,
         "userID": 1,
         "destinationID": 3,
-        "travelers": 4,
+        "travelers": 1,
         "date": "2021/05/22",
-        "duration": 17,
+        "duration": 2,
         "status": "pending",
         "suggestedActivities": []
       };
@@ -38,9 +38,9 @@ describe('Trip', () => {
     expect(trip.id).to.equal(3);
     expect(trip.userID).to.equal(1);
     expect(trip.destinationID).to.equal(3);
-    expect(trip.travelers).to.equal(4);
+    expect(trip.travelers).to.equal(1);
     expect(trip.date).to.equal("2021/05/22");
-    expect(trip.duration).to.equal(17);
+    expect(trip.duration).to.equal(2);
     expect(trip.status).to.equal("pending");
     expect(trip.suggestedActivities).to.deep.equal([]);
   });
@@ -48,4 +48,9 @@ describe('Trip', () => {
   it('should also store destination data', () => {
     expect(trip.destination).to.deep.equal(destinationData[0])
   });
+
+  it('should calculate trip cost', () => {
+    const tripCost = trip.getQuote();
+    expect(tripCost).to.equal(1331)
+  })
 });

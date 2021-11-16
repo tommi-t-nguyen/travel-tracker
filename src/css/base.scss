@@ -1,6 +1,54 @@
 /* This is an example of how to import a partial scss file*/
 @import '_variables';
-
+@import '_mixins';
+@import '_normalize';
 body {
+  height:100vh;
   background: $primary-background;
+}
+nav {
+  background-color: $nav-background;
+  @include flex-row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+.main-container{
+  @include flex-row
+}
+.booking-form{
+  @include flex-column;
+  align-content: center;
+  margin-top: 150px;
+  margin-right: 5%;
+  margin-left: 5%;
+  position: relative;
+}
+.trip-board{
+  @include flex-column;
+}
+.trip-container{
+  @include flex-row;
+  flex-wrap: wrap;
+}
+.trip-card{
+  @include flex-column;
+  background-color: $nav-background;
+  height: 30vh;
+  width: auto;
+  margin:5px;
+  padding: 5px;
+}
+
+.destination-img {
+  height: 20vh;
+  width: 20vw;
+}
+
+.img-container {
+  height: 20vh;
+  width: 20vw;
+  overflow: hidden;
+  background-size: contain;
 }

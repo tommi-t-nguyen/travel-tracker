@@ -14,9 +14,9 @@ describe('Traveler', () => {
         "id": 3,
         "userID": 1,
         "destinationID": 3,
-        "travelers": 4,
+        "travelers": 1,
         "date": "2021/05/22",
-        "duration": 17,
+        "duration": 2,
         "status": "pending",
         "suggestedActivities": []
       },
@@ -24,9 +24,9 @@ describe('Traveler', () => {
         "id": 4,
         "userID": 1,
         "destinationID": 4,
-        "travelers": 2,
+        "travelers": 1,
         "date": "2021/02/25",
-        "duration": 10,
+        "duration": 2,
         "status": "approved",
         "suggestedActivities": []
       }
@@ -71,9 +71,9 @@ describe('Traveler', () => {
         id: 3,
         userID: 1,
         destinationID: 3,
-        travelers: 4,
+        travelers: 1,
         date: '2021/05/22',
-        duration: 17,
+        duration: 2,
         status: 'pending',
         suggestedActivities: [],
         destination: {
@@ -89,9 +89,9 @@ describe('Traveler', () => {
         id: 4,
         userID: 1,
         destinationID: 4,
-        travelers: 2,
+        travelers: 1,
         date: '2021/02/25',
-        duration: 10,
+        duration: 2,
         status: 'approved',
         suggestedActivities: [],
         destination: {
@@ -106,4 +106,9 @@ describe('Traveler', () => {
     ]);
   });
 
-})
+  it('should calculate a traveler amount spent for the year', () => {
+    const yearTotal = traveler.calculateYearTotal()
+    expect(yearTotal).to.equal(1859);
+  });
+
+});

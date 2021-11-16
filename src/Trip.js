@@ -10,5 +10,11 @@ class Trip {
     this.suggestedActivities = [];
     this.destination = destinationData.find(destination => destination.id === this.destinationID);
   }
+  getQuote() {
+    const flightCost = this.destination.estimatedFlightCostPerPerson * this.travelers;
+    const lodgingCost = this.destination.estimatedLodgingCostPerDay *this.duration * this.travelers;
+    const total = (flightCost + lodgingCost) * 1.10;
+    return total;
+  }
 }
 export default  Trip;

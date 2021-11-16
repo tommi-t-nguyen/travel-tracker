@@ -18,5 +18,18 @@ class Traveler {
     });
     return allTrips
   }
+  calculateYearTotal(){
+    const tripCost = this.travelerTripsData.filter(trip => {
+      let today = new Date()
+      if(new Date(trip.date).getFullYear()=== today.getFullYear()){
+        return trip;
+      }
+    });
+    const yearlyTotal = tripCost.reduce((total,trip) => {
+      total += trip.getQuote();
+      return total;
+    },0);
+    return yearlyTotal;
+  }
 }
 export default  Traveler;

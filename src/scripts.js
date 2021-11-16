@@ -1,8 +1,50 @@
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
 import { getTravelerData, getAllTrips, getAllDestinations, addTrip } from './fetch.js'
 import Traveler from './Traveler.js'
 import Trip from './Trip.js'
+import domUpdates from './domUpdates.js'
+
+
+
+const welcomeContainer = document.querySelector('#welcomeContainer')
+const upcoming = document.querySelector('#upcoming')
+const past = document.querySelector('#past')
+const pending = document.querySelector('#pending')
+
+
+const onStart = (userID) => {
+  return Promise.all([getTravelerData(userID), getAllTrips(),getAllDestinations()])
+  .then(data => parseData(data))
+}
+
+const parseData = (data) => {
+  const traveler = data[0];
+  const trips = data[1].trips;
+  const destination = data[2].destinations;
+  loadPage([traveler, trips, destination])
+}
+
+const loadPage = (data) => {
+  const currentTraveler = new Traveler (data[0],data[1],data[2]);
+  welcomeContainer.innerHTML = domUpdates.renderGreeting(currentTraveler);
+  sortTrip(currentTraveler)
+}
+const sortTrip = (currentTraveler) => {
+  upcoming.innerHTML = '';
+  past.innerHTML = '';
+  pending.innerHTML = '';
+  currentTraveler.travelerTripsData.forEach((trip, index) => {
+    if(new Date(trip.date) > new Date() && trip.status === 'approved'){
+      upcoming.innerHTML += domUpdates.renderCard(trip)
+    }
+    if(new Date(trip.date) < new Date() && trip.status === 'approved'){
+      past.innerHTML += domUpdates.renderCard(trip)
+    }
+    if(trip.status === 'pending'){
+      pending.innerHTML += domUpdates.renderCard(trip)
+    }
+
+  })
+}
+
+window.addEventListener('load',onStart(7))

@@ -20,7 +20,7 @@ const domUpdates = {
     </article>`
   },
   renderDestinations(destination){
-    return`<option value=${destination} name='destination'>${destination}</option>`
+    return`<option value=${destination.id} name='destination'>${destination.destination}</option>`
   }
 
 

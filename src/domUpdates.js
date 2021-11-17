@@ -18,6 +18,9 @@ const domUpdates = {
         Status: ${trip.status}
       </p>
     </article>`
+  },
+  renderDestinations(destination){
+    return`<option value=${destination} name='destination'>${destination}</option>`
   }
 
 

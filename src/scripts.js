@@ -4,6 +4,7 @@ import Traveler from './Traveler.js'
 import Trip from './Trip.js'
 import domUpdates from './domUpdates.js'
 
+let destinationData, tripsData, currentTraveler;
 
 
 const welcomeContainer = document.querySelector('#welcomeContainer')
@@ -11,7 +12,9 @@ const upcoming = document.querySelector('#upcoming')
 const past = document.querySelector('#past')
 const pending = document.querySelector('#pending')
 const destinationForm = document.querySelector('#destinations')
-
+const form = document.querySelector('#bookingForm')
+const quote = document.querySelector('#quoteButton')
+const submit = document.querySelector('#submit')
 
 const onStart = (userID) => {
   return Promise.all([getTravelerData(userID), getAllTrips(),getAllDestinations()])
@@ -26,11 +29,12 @@ const parseData = (data) => {
 }
 
 const loadPage = (data) => {
-  const destinationData = data[2]
-  const currentTraveler = new Traveler (data[0],data[1],data[2]);
+  tripsData = data[1]
+  destinationData = data[2]
+  currentTraveler = new Traveler (data[0],data[1],data[2]);
   welcomeContainer.innerHTML = domUpdates.renderGreeting(currentTraveler);
   sortTrip(currentTraveler);
-  addDestinations(destinationData);
+  addDestinations(destinationData)
 }
 const sortTrip = (currentTraveler) => {
   upcoming.innerHTML = '';
@@ -50,8 +54,25 @@ const sortTrip = (currentTraveler) => {
 }
 const addDestinations = (destinationData) => {
   destinationData.forEach((destination) => {
-    destinationForm.innerHTML += domUpdates.renderDestinations(destination.destination);
+    destinationForm.innerHTML += domUpdates.renderDestinations(destination);
   })
 }
+form.addEventListener('submit', (e) => {
+
+  const formData = new FormData(e.target);
+  const newTrip ={
+    id: tripsData.length+1,
+    userID: currentTraveler.id,
+    destinationID:Number(formData.get('destinations')),
+    travelers: Number(formData.get('numTravelers')),
+    date: formData.get('date').replace(/-/gi, "/"),
+    duration: Number(formData.get('duration')),
+    status: "pending",
+    suggestedActivities:[]
+  };
+  e.target.reset();
+  addTrip(newTrip);
+})
+
 
 window.addEventListener('load',onStart(7))

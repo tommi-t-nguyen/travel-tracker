@@ -17,7 +17,7 @@
     </div>
   </nav>
   <main class='main-container'>
-    <form class='booking-form'>
+    <form class='booking-form' id=bookingForm>
       <h2>Where to next?</h2>
       <label for='start-date'>Start Date:
         <input type='date' id='start-date' name='date' min='2021-11-16' required>
@@ -32,8 +32,8 @@
         <select name='destinations' id='destinations' required>
         </select>
       </label>
-      <button class='quote-button' id='quoteButton'>Get a Quote</button>
-      <button class='submit' id='submit'>Book Trip</button>
+      <button type='button'class='quote-button' id='quoteButton'>Get a Quote</button>
+      <button type='submit'class='submit' id='submit'>Book Trip</button>
     </form>
     <section class='trip-board-container' id='tripBoard'>
       <article class='trip-board' id='upcomingTrips'>

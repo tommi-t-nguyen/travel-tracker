@@ -21,7 +21,7 @@ class Traveler {
   calculateYearTotal(){
     const tripCost = this.travelerTripsData.filter(trip => {
       let today = new Date()
-      if(new Date(trip.date).getFullYear()=== today.getFullYear()){
+      if(new Date(trip.date).getFullYear()=== today.getFullYear()&& trip.status === 'approved'){
         return trip;
       }
     });

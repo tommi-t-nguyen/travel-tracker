@@ -14,6 +14,7 @@ const pending = document.querySelector('#pending')
 const destinationForm = document.querySelector('#destinations')
 const form = document.querySelector('#bookingForm')
 const quote = document.querySelector('#quoteButton')
+const quoteDisplay = document.querySelector('#pendingQuote')
 const submit = document.querySelector('#submit')
 
 const onStart = (userID) => {
@@ -58,10 +59,10 @@ const addDestinations = (destinationData) => {
   })
 }
 form.addEventListener('submit', (e) => {
-
+  e.preventDefault()
   const formData = new FormData(e.target);
   const newTrip ={
-    id: tripsData.length+1,
+    id: Date.now(),
     userID: currentTraveler.id,
     destinationID:Number(formData.get('destinations')),
     travelers: Number(formData.get('numTravelers')),
@@ -70,9 +71,11 @@ form.addEventListener('submit', (e) => {
     status: "pending",
     suggestedActivities:[]
   };
-  e.target.reset();
-  addTrip(newTrip);
+  addTrip(newTrip)
+  e.target.reset()
+  onStart(50)
 })
 
 
-window.addEventListener('load',onStart(7))
+
+window.addEventListener('load',onStart(50))
